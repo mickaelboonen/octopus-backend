@@ -2,6 +2,10 @@
 #    path: /
 #    controller: App\Controller\DefaultController::index
 
+home:
+   path: /
+   controller: App\Controller\HomeController::index
+
 app_artist_index:
    path: /artists
    controller: App\Controller\ArtistController::index
@@ -10,3 +14,6 @@ app_api_artist:
    path: /api/artists
    controller: App\Controller\API\ApiArtistController::index
 
+app_date_index:
+   path: /date
+   controller: App\Controller\DateController::index

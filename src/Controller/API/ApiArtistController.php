@@ -9,16 +9,31 @@ use App\Repository\ArtistRepository;
 
 class ApiArtistController extends AbstractController
 {
+
+    
+    private $repository;
+
+    public function __construct(ArtistRepository $tagRepository )
+    {
+        $this->repository = $tagRepository;
+    }
+    /**
+     * @Route("/all", name="all", methods={"GET"})
+     */
+    public function getAllTags(): Response
+    {
+
+        //I return Tags and status code
+        return $this->json($this->repository->findAll(), Response::HTTP_OK, [], [
+            'groups' => ['api_tags_all']
+        ]);
+    }
+
     /**
      * @Route("/api/artists", name="app_api_artist")
      */
-    public function index(ArtistRepository $artistRepository): Response
+    public function index(): Response
     {
-        $artists = $artistRepository->findAll();
-        $artists = $this->json($artists);
-        // return $this->render('api_artist/index.html.twig', [
-        //     'controller_name' => 'ApiArtistController',
-        // ]);
-        return new Response($artists, Response::HTTP_OK, []);
+        return $this->json($this->repository->findAll(), Response::HTTP_OK, []);
     }
 }

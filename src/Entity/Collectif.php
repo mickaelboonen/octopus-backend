@@ -34,15 +34,9 @@ class Collectif
      */
     private $play;
 
-    /**
-     * @ORM\OneToMany(targetEntity=Artist::class, mappedBy="collectif_id")
-     */
-    private $artist;
-
     public function __construct()
     {
         $this->play = new ArrayCollection();
-        $this->artist = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -104,33 +98,4 @@ class Collectif
         return $this;
     }
 
-    /**
-     * @return Collection<int, Artist>
-     */
-    public function getArtist(): Collection
-    {
-        return $this->artist;
-    }
-
-    public function addArtist(Artist $artist): self
-    {
-        if (!$this->artist->contains($artist)) {
-            $this->artist[] = $artist;
-            $artist->setCollectifId($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArtist(Artist $artist): self
-    {
-        if ($this->artist->removeElement($artist)) {
-            // set the owning side to null (unless already changed)
-            if ($artist->getCollectifId() === $this) {
-                $artist->setCollectifId(null);
-            }
-        }
-
-        return $this;
-    }
 }

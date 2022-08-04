@@ -10,10 +10,16 @@ app_artist_index:
    path: /artists
    controller: App\Controller\ArtistController::index
 
+app_date_index:
+   path: /date
+   controller: App\Controller\DateController::index
+
+# API routes -----------------------------------------------
+
 app_api_artist:
    path: /api/artists
    controller: App\Controller\API\ApiArtistController::index
 
-app_date_index:
-   path: /date
-   controller: App\Controller\DateController::index
+app_api_picture_id:
+   path: /api/pictures/{id}
+   controller: App\Controller\API\ApiPictureController::index

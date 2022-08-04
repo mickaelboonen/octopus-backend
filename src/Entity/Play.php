@@ -40,25 +40,20 @@ class Play
     private $artist;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Collectif::class, inversedBy="play")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $collectif_id;
-
-    /**
      * @ORM\OneToMany(targetEntity=Date::class, mappedBy="play_id")
      */
     private $play_date;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Picture::class)
-     */
-    private $image;
+    // /**
+    //  * @ORM\OneToMany(targetEntity=Picture::class, mappedBy="play")
+    //  */
+    // private $pictures;
 
     public function __construct()
     {
         $this->artist = new ArrayCollection();
         $this->play_date = new ArrayCollection();
+        $this->pictures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -129,18 +124,6 @@ class Play
         return $this;
     }
 
-    public function getCollectifId(): ?Collectif
-    {
-        return $this->collectif_id;
-    }
-
-    public function setCollectifId(?Collectif $collectif_id): self
-    {
-        $this->collectif_id = $collectif_id;
-
-        return $this;
-    }
-
     /**
      * @return Collection<int, Date>
      */
@@ -171,15 +154,33 @@ class Play
         return $this;
     }
 
-    public function getImage(): ?Picture
-    {
-        return $this->image;
-    }
+    // /**
+    //  * @return Collection<int, Picture>
+    //  */
+    // public function getPictures(): Collection
+    // {
+    //     return $this->pictures;
+    // }
 
-    public function setImage(?Picture $image): self
-    {
-        $this->image = $image;
+    // public function addPicture(Picture $picture): self
+    // {
+    //     if (!$this->pictures->contains($picture)) {
+    //         $this->pictures[] = $picture;
+    //         $picture->setPlay($this);
+    //     }
 
-        return $this;
-    }
+    //     return $this;
+    // }
+
+    // public function removePicture(Picture $picture): self
+    // {
+    //     if ($this->pictures->removeElement($picture)) {
+    //         // set the owning side to null (unless already changed)
+    //         if ($picture->getPlay() === $this) {
+    //             $picture->setPlay(null);
+    //         }
+    //     }
+
+    //     return $this;
+    // }
 }

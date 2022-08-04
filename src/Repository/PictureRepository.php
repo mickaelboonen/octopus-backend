@@ -2,7 +2,7 @@
 
 namespace App\Repository;
 
-use App\Entity\Picture;
+use App\Entity\{Picture, Play};
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -42,17 +42,25 @@ class PictureRepository extends ServiceEntityRepository
 //    /**
 //     * @return Picture[] Returns an array of Picture objects
 //     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   public function findPicturesByPlay(Play $play): array
+    {
+        // I sepcify the alias for the entity
+        $qb = $this->createQueryBuilder('p')
+        ->leftJoin('p.play','pp')
+        // I add the condition for precise that i want tags in the result
+        ->select('p.id','p.url','p.credits','p.play')
+        ->where('pp = :play')
+        // I precise the parameter
+        ->setParameter('play', $play);
+         // I take back the QueryBuilder and the result
+        return $qb->getQuery()->getResult();
+    //    return $this->createQueryBuilder('p')
+    //        ->andWhere('p.play = :val')
+    //        ->setParameter('val', $play_id)
+    //        ->getQuery()
+    //        ->getResult()
+    //    ;
+   }
 
 //    public function findOneBySomeField($value): ?Picture
 //    {

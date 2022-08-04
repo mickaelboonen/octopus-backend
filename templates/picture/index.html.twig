@@ -4,12 +4,13 @@
 
 {% block body %}
     <h1>Picture index</h1>
-
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
                 <th>Url</th>
+                <th>Spectacle</th>
+                <th>Credits</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -17,7 +18,11 @@
         {% for picture in pictures %}
             <tr>
                 <td>{{ picture.id }}</td>
-                <td>{{ picture.url }}</td>
+                <td>
+                    <img src="{{ picture.url }}" alt="Logo de l'Université de Nîmes" style="width: 10rem"/>
+                </td>
+                <td>{{ picture.play.id }}</td>
+                <td>{{ picture.credits }}</td>
                 <td>
                     <a href="{{ path('app_picture_show', {'id': picture.id}) }}">show</a>
                     <a href="{{ path('app_picture_edit', {'id': picture.id}) }}">edit</a>
@@ -25,7 +30,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="5">no records found</td>
             </tr>
         {% endfor %}
         </tbody>
@@ -33,3 +38,5 @@
 
     <a href="{{ path('app_picture_new') }}">Create new</a>
 {% endblock %}
+
+

@@ -22,6 +22,16 @@ class Picture
      */
     private $url;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $credits;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Play::class, inversedBy="pictures")
+     */
+    private $play;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +45,30 @@ class Picture
     public function setUrl(string $url): self
     {
         $this->url = $url;
+
+        return $this;
+    }
+
+    public function getCredits(): ?string
+    {
+        return $this->credits;
+    }
+
+    public function setCredits(?string $credits): self
+    {
+        $this->credits = $credits;
+
+        return $this;
+    }
+
+    public function getPlay(): ?Play
+    {
+        return $this->play;
+    }
+
+    public function setPlay(?Play $play): self
+    {
+        $this->play = $play;
 
         return $this;
     }

@@ -23,3 +23,19 @@ app_api_artist:
 app_api_picture_id:
    path: /api/pictures/{id}
    controller: App\Controller\API\ApiPictureController::index
+
+app_api_artist_isformer:
+   path : /api/artists/is_former
+   controller: App\Controller\API\ApiArtistController::getFormerArtists
+
+app_api_plays:
+   path: /api/plays
+   controller: App\Controller\API\ApiPlayController::index
+
+app_api_play_name: 
+   path: /api/play/{name}
+   controller: App\Controller\API\ApiPlayController::getByName
+
+app_api_date:
+   path: /api/date
+   controller: App\Controller\API\ApiDateController::index

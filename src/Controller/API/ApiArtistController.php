@@ -36,4 +36,12 @@ class ApiArtistController extends AbstractController
     {
         return $this->json($this->repository->findAll(), Response::HTTP_OK, []);
     }
+
+    /**
+     * @Route("/api/artists/is_former", name="app_api_artist_isformer")
+     */
+    public function getFormerArtists(): Response
+    {
+        return $this->json($this->repository->findByIsFormer(), Response::HTTP_OK, []);
+    }
 }

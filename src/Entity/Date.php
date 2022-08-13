@@ -32,11 +32,11 @@ class Date
      */
     private $place_url;
 
-    /**
-     * @ORM\ManyToOne(targetEntity=Play::class, inversedBy="play_date")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $play_id;
+    // /**
+    //  * @ORM\ManyToOne(targetEntity=Play::class, inversedBy="play_date")
+    //  * @ORM\JoinColumn(nullable=false)
+    //  */
+    // private $play_id;
 
     public function getId(): ?int
     {
@@ -79,15 +79,15 @@ class Date
         return $this;
     }
 
-    public function getPlayId(): ?Play
-    {
-        return $this->play_id;
-    }
+    // public function getPlayId(): ?Play
+    // {
+    //     return $this->play_id;
+    // }
 
-    public function setPlayId(?Play $play_id): self
-    {
-        $this->play_id = $play_id;
+    // public function setPlayId(?Play $play_id): self
+    // {
+    //     $this->play_id = $play_id;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 }

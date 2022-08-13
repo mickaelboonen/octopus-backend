@@ -39,20 +39,18 @@ class ArtistRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Artist[] Returns an array of Artist objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('a')
-//            ->andWhere('a.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('a.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Artist[] Returns an array of Artist objects
+    */
+   public function findByIsFormer(): array
+   {
+       return $this->createQueryBuilder('a')
+           ->andWhere('a.is_former = :val')
+           ->setParameter('val', 1)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Artist
 //    {

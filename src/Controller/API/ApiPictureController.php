@@ -5,7 +5,7 @@ namespace App\Controller\API;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Repository\PictureRepository;
+use App\Repository\PhotoRepository;
 
 class ApiPictureController extends AbstractController
 {
@@ -13,7 +13,7 @@ class ApiPictureController extends AbstractController
     
     private $repository;
 
-    public function __construct(PictureRepository $pictureRepository )
+    public function __construct(PhotoRepository $pictureRepository )
     {
         $this->repository = $pictureRepository;
     }

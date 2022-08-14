@@ -39,3 +39,13 @@ app_api_play_name:
 app_api_date:
    path: /api/date
    controller: App\Controller\API\ApiDateController::index
+
+app_api_subscribers_list:
+   path: /api/subscribers
+   controller: App\Controller\API\ApiNewsletterController::index
+
+app_api_subscribe:
+   path: /api/newsletter/subscribe
+   controller: App\Controller\API\ApiNewsletterController::subscribe
+   methods: POST
+

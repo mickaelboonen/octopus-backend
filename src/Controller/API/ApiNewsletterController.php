@@ -47,25 +47,21 @@ class ApiNewsletterController extends AbstractController
         }
         
         if ($message === '') {
-            // $this->repository->add($subscriber, true);
+            $this->repository->add($subscriber, true);
             $message = "Votre inscription à la newsletter a été prise en compte. Vous recevrez sous peu un mail de confirmation.";
 
 
             $mailMessage = 'YATA !';
 
-            $mailer->sendEmail($mailMessage);
 
-
-
-
-
+            // $mailer->sendEmail($mailMessage);
 
             return $this->json($message, Response::HTTP_CREATED, []);
         }
         else {
             $mailMessage = 'YATA !';
 
-            $mailer->sendEmail($mailMessage);
+            // $mailer->sendEmail($mailMessage);
             return $this->json($message, Response::HTTP_UNAUTHORIZED, []);
         }
     } 
@@ -75,12 +71,11 @@ class ApiNewsletterController extends AbstractController
      */
     public function unsubscribe(Request $request, MailerService $mailer): Response
     {
-        $data = json_decode($request->getContent(), true);
         $path = $request->getPathInfo();
-        $idToDelete = substr($path, strlen($path) - 1, strlen($path));
+        $pathArray = explode('/', $path);
+        $idToDelete = $pathArray[count($pathArray) - 1];
         $message = '';
-
-        $subscriber = $this->repository->findById($idToDelete);
+        $subscriber = $this->repository->findById((int) $idToDelete);
 
         if (count($subscriber) > 0) {
 

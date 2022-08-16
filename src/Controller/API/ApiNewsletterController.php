@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\NewsletterRepository;
+use App\Service\MailerService;
 
 class ApiNewsletterController extends AbstractController
 {
@@ -29,7 +30,7 @@ class ApiNewsletterController extends AbstractController
     /**
      * @Route("/api/newsletter/subscribe", name="app_api_subscribe", methods={"POST"})
      */
-    public function subscribe(Request $request): Response
+    public function subscribe(Request $request, MailerService $mailer): Response
     {
         $data = json_decode($request->getContent(), true);
         $message = '';
@@ -46,12 +47,76 @@ class ApiNewsletterController extends AbstractController
         }
         
         if ($message === '') {
-            $this->repository->add($subscriber, true);
+            // $this->repository->add($subscriber, true);
             $message = "Votre inscription à la newsletter a été prise en compte. Vous recevrez sous peu un mail de confirmation.";
+
+
+            $mailMessage = 'YATA !';
+
+            $mailer->sendEmail($mailMessage);
+
+
+
+
+
+
             return $this->json($message, Response::HTTP_CREATED, []);
         }
         else {
+            $mailMessage = 'YATA !';
+
+            $mailer->sendEmail($mailMessage);
             return $this->json($message, Response::HTTP_UNAUTHORIZED, []);
+        }
+    } 
+
+    /**
+     * @Route("/api/newsletter/unsubscribe/{id}", name="app_api_unsubscribe", methods={"DELETE"})
+     */
+    public function unsubscribe(Request $request, MailerService $mailer): Response
+    {
+        $data = json_decode($request->getContent(), true);
+        $path = $request->getPathInfo();
+        $idToDelete = substr($path, strlen($path) - 1, strlen($path));
+        $message = '';
+
+        $subscriber = $this->repository->findById($idToDelete);
+
+        if (count($subscriber) > 0) {
+
+            $this->repository->remove($subscriber[0], true); 
+        
+            $message = 'Vous avez bien été retiré de la newsletter';
+
+            return $this->json($message, Response::HTTP_OK, []);
+
+
+        }
+        else {
+            $message = "Cet email n'est pas enregistré dans notre base de données";
+
+            return $this->json($message, Response::HTTP_NOT_FOUND, []);
+
+        }
+    } 
+    /**
+     * @Route("/api/newsletter/get_id", name="app_api_newsletter_getid", methods={"POST"})
+     */
+    public function getId(Request $request, MailerService $mailer): Response
+    {
+        $data = json_decode($request->getContent(), true);
+        $subscriber = $this->repository->findByEmail($data['email']);
+
+        if (count($subscriber) > 0) {
+
+            return $this->json($subscriber, Response::HTTP_OK, []);
+
+        }
+        else {
+            $message = "Cet email n'est pas enregistré dans notre base de données";
+
+            return $this->json($message, Response::HTTP_NOT_FOUND, []);
+
         }
     } 
 }

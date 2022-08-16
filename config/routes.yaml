@@ -49,3 +49,17 @@ app_api_subscribe:
    controller: App\Controller\API\ApiNewsletterController::subscribe
    methods: POST
 
+app_api_unsubscribe:
+   path: /api/newsletter/unsubscribe/{id}
+   controller: App\Controller\API\ApiNewsletterController::unsubscribe
+   methods: DELETE
+
+app_api_newsletter_getid:
+   path: /api/newsletter/get_id
+   controller: App\Controller\API\ApiNewsletterController::getId
+   methods: POST
+
+
+app_api_email_subscription:
+   path: /api/subscription-confirmation
+   controller: App\Controller\MailerController::sendEmail

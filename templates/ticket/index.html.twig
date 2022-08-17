@@ -24,7 +24,11 @@
         {% for ticket in tickets %}
             <tr>
                 <td>{{ ticket.id }}</td>
-                <td>{{ ticket.subject }}</td>
+                <td>{{ ticket.subject }}
+                    {% if ticket.isRead is same as(false) %}
+                        <div class="tickets-notif tickets-notif--new">New</div>
+                    {% endif %}
+                </td>
                 <td>{{ ticket.content }}</td>
                 <td>{{ ticket.isRead ? 'Yes' : 'No' }}</td>
                 <td>{{ ticket.isResponse ? 'Yes' : 'No' }}</td>

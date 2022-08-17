@@ -1,0 +1,38 @@
+#tickets-li {
+    display: flex;
+    align-items: center;
+}
+
+.tickets-notif {
+    background-color: #d73a3b;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 5px;
+    width: 1.5rem;
+    height: 1.5rem;
+    position: relative;
+    margin-left: 0.2rem;
+    text-align: center;
+    box-shadow: 1px 1px 1px #000;
+}
+
+.tickets-notif--new {
+    width: fit-content;
+    padding: 0.2rem 0.5rem;
+    display: inline;
+    text-transform: uppercase;
+    font-size: 0.8em;
+}
+
+.tickets-notif::after {
+    content: '';
+    position: absolute;
+    top: calc(50% - 5px);
+    left: -5px;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-width: 5px 5px 5px 0;
+    border-color: transparent #d73a3b transparent transparent;
+    transform: rotate(0deg);
+}

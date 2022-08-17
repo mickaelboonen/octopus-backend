@@ -13,6 +13,13 @@
         <li class="nav-item">
           <a class="nav-link" href="/collectif">Collectif</a>
         </li>
+        <li class="nav-item flex" id="tickets-li">
+          <a class="nav-link" href="/ticket">Tickets</a>
+          {% if not notifications is same as(0) %}
+              <div class="tickets-notif">{{notifications}}</div>
+          {% endif %}
+          
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Spectacles

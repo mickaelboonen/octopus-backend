@@ -28,9 +28,9 @@ class Ticket
     private $content;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", name="is_read")
      */
-    private $is_read;
+    private $isRead;
 
     /**
      * @ORM\Column(type="boolean")
@@ -88,12 +88,12 @@ class Ticket
 
     public function isIsRead(): ?bool
     {
-        return $this->is_read;
+        return $this->isRead;
     }
 
-    public function setIsRead(bool $is_read): self
+    public function setIsRead(bool $isRead): self
     {
-        $this->is_read = $is_read;
+        $this->isRead = $isRead;
 
         return $this;
     }

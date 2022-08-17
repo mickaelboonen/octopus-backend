@@ -13,15 +13,18 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * @Route("/ticket")
  */
-class TicketController extends AbstractController
+class TicketController extends CoreController
 {
     /**
      * @Route("/", name="app_ticket_index", methods={"GET"})
      */
     public function index(TicketRepository $ticketRepository): Response
     {
+        $session = $this->requestStack->getSession();
+        $notifications = $session->get('notifications');
         return $this->render('ticket/index.html.twig', [
             'tickets' => $ticketRepository->findAll(),
+            'notifications' => $notifications,
         ]);
     }
 
